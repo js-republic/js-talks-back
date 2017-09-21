@@ -1,10 +1,9 @@
-
-{
-  "language": "node_js",
-  "node_js": "8",
-  "services": [],
-  "script": [
-    "npm run build",
-    "npm run test"
-  ]
-}
+before_install:
+  - npm install yarn
+language: node_js
+node_js:
+  - "6.9.0"
+deploy:
+  provider: elasticbeanstalk
+  region: CI
+  app: "js-talks-back"
