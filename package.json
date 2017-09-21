@@ -1,0 +1,19 @@
+{
+  "name": "js-talks-back",
+  "version": "1.0.0",
+  "description": "JS Talks backend.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js-republic/js-talks-back.git"
+  },
+  "author": "JS Craftsmen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/js-republic/js-talks-back/issues"
+  },
+  "homepage": "https://github.com/js-republic/js-talks-back#readme"
+}
