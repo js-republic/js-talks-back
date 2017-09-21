@@ -58,6 +58,8 @@
 		"@types/node": "^7.0.12",
 		"@types/nodemailer": "^1.3.32",
 		"@types/passport": "^0.3.3",
+		"@types/supertest": "^2.0.0",
+		"supertest": "^2.0.1",
 		"concurrently": "^3.4.0",
 		"jest": "^19.0.2",
 		"nodemon": "^1.11.0",
