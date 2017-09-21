@@ -4,18 +4,23 @@ export interface User {
     email: string;
 }
 
+
+export type Kind = "request" | "proposal";
+
+export type Duration = 30 | 60 | 180;
+
 export interface Talk {
     id: string;
 
     author: User;
 
-    duration: 30 | 60 | 180;
+    duration: Duration;
 
     title: string;
 
     description: string;
 
-    kind: "request" | "proposal";
+    kind: Kind;
 
     scheduled?: Date;
 
