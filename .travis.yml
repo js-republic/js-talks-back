@@ -14,3 +14,4 @@ deploy:
     secure: "Encypted SECRET_ACCESS_KEY"
   region: "eu-west-2"
   app: "js-talks-back"
+  bucket_name: elasticbeanstalk-eu-west-2-593447037087
