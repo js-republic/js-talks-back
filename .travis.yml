@@ -1,18 +1,4 @@
-
-{
-  "language": "node_js",
-  "node_js": "8",
-  "services": [],
-  "script": [
-    "npm run build",
-    "npm run test",
-    "eb deploy"
-  ],
   deploy:
-  provider: elasticbeanstalk
-  access_key_id: AKIAJEAYVT7LL7BNEPVA
-  secret_access_key:
-    secure: "Encypted KE9ju19+MNX8RDkmVsqC31B+QcsKPKuyplt+8dqT="
-  region: "eu-west-2"
-  app: "js-talks-back"
-}
+    provider: elasticbeanstalk
+    region: CI
+    app: "js-talks-back"
