@@ -1,4 +1,5 @@
-  deploy:
-    provider: elasticbeanstalk
-    region: CI
-    app: "js-talks-back"
+language: node_js
+deploy:
+  provider: elasticbeanstalk
+  region: CI
+  app: "js-talks-back"
