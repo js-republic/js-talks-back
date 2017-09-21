@@ -1,3 +1,7 @@
+env:
+  global:
+    secure: "CfS5oE99Ja5koF/pscE5v6m+JTzmHzAchnFaPKe200epBBOGFbgHYyXCyC5nMfRUcJVmwpY0lpuJ0P06Fc2s+h44H3Ho2P6JwRdnoAYrtqMVlJ8x+a8D2/vPGANyvdcxYeWAtxv6eSIQU72r2FvGXG7plddkfocAwVlDChEmBVC/Y9idFoXggMWXdBxpVwaH+gCfqmggYPo9cXcM/4eiV75agizoYEWObKFZrY4Na+kWyGi00sH/L4oknUk54OmfX8LjxB4UI8iKk69jee9Zj3nNpdvUx0FMJG+pTM0G0a1201eVmn3MBciOjZMPrnYATdvaxsiRyuuHerHowgfdp29/Ic+TNSJdzYjFwCvOxWTJ9n4EALXf9bKwcbpwVnWwvEs6vtkHZb2eFKiD8aD/gk9sv7X+Ie1OGnvjEOZvuwf3S0FQP99UbabMEZwhG414hQ1lBZqQaKD0cfr9lceXdT73YkJ6dowl2GJq3OMMTZmaJFLNWWPqj6XDyhbMn0Xc2qkd49rhqkF0IBU8jjxUndYcthqTWxKdvlaNXyRZHMoWTs82doyUJTW7GVxZCL+VALZAX8gdKQRED7E+J/BbDjLc3JWRSLr+GoxOfmObN6BumDpHp4He0f4BVij3dIzODeFLG1QmcLZjkRufQHO2yH2vXdrJp9esTuLf0DPHfHE="
+    secure: "i1lkmxNl0TLcEaBCVwtHoYbWizvS/55TyLwwKcHg4x0y6ulhgKJPeyGscn52m8bS0P6zHiaFXz2Hhl27fSmS0HxMSpXed2IH+W9G34fulx3M0FxFp4DlWYbh9FFuPRz5r/gFuoHBRvsQQ0PixswZsQbLwFbkkcdsYIhAGJ/r7C9kmOj71FdJVFxp1vqZFKirbn5eqv3B/bZJ3mFa3v89fklVc6m2KOQoztf5ynHRWyEvCgI8Na/dFgCtJSbs+dF/tknyq7XOPNp4d/aWPP9OHEQRIlMIAZWAXuEkYH2hsTfY5rgCo6+YAHUmG32X+jtFZEnXltbAGcCYJMTvpbMvsYouTJ+VyRVZYTkmolXR+YlRcLcqbIgfXoOlvSJJ+NfkcjwAAc49KmPJBLXQDj0gwf2BLebQFEWrpFRpA+551WPzsEFlsDjXvT5UgmFjh8LsEunoUChvK95J/J4S/s6TPSuANWK5sXSb7IijMDFg/QitfEbAciCOWhkvuPCaOoUi05k+o2jPLshTELhflotzVaLH5eM0FT9UGzNEco/IDMgsqBypSlh0BRRfnD8p/eWlpHMjRdgzr8SkRoIuYlv4CHRilHt1SeLjaZavoy5zCjvdhtkBqFYKQRWGIGwsDEvTP4Tb3a79IYxoSv5QlTi1FNYZuLesIOh+rqZ2riG9BHU="
 before_install:
   - npm install yarn
 language: node_js
@@ -5,5 +9,8 @@ node_js:
   - "6.9.0"
 deploy:
   provider: elasticbeanstalk
-  region: CI
+  access_key_id: ACCESS_KEY_ID
+  secret_access_key:
+    secure: "Encypted SECRET_ACCESS_KEY"
+  region: "eu-west-2"
   app: "js-talks-back"
