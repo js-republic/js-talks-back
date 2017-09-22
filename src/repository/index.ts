@@ -1,26 +1,32 @@
 import * as _ from "lodash";
-import { Talk, User, Duration, Kind } from "./models";
+import { Talk, User, Duration, Kind } from "../types";
 import * as mysql from "mysql";
-import { select, sql, update } from "./utils/database-helpers";
+import { select, sql, update } from "../database";
 
 export async function insertTalk(talk: Talk): Promise<Talk> {
-  const talkToInsert =
-    _.mapKeys(talk, (value: any, key: string) => _.snakeCase(key));
+  const talkToInsert = {
+    description: talk.description,
+    author: talk.author.id,
+    duration: talk.duration,
+    title: talk.title,
+    kind: talk.kind,
+    scheduled_at: talk.scheduledAt,
+  };
   const id = await update(sql`insert into talk set ${talkToInsert}`);
   return {...talk, id};
 }
 
-export async function findLikesByTalkId(talkId: string): Promise<User[]> {
+export async function findLikesByTalkId(talkId: number): Promise<User[]> {
   const { rows } = await select(sql`
     select user.id, user.email
-    from like
-    join user on like.user=user.id
-    where like.talk = ${talkId}
+    from \`like\` l
+    join user on l.user=user.id
+    where l.talk=${talkId}
   `);
   return rows.map((row: any): User => row as User);
 }
 
-export async function findSpeakersByTalkId(talkId: string): Promise<User[]> {
+export async function findSpeakersByTalkId(talkId: number): Promise<User[]> {
   const { rows } = await select(sql`
     select user.id, user.email
     from speak
@@ -32,20 +38,30 @@ export async function findSpeakersByTalkId(talkId: string): Promise<User[]> {
 
 export async function findTalks(): Promise<Talk[]> {
   const { rows } = await select(sql`
-    select *
+    select
+      t.id as talk_id,
+      t.title,
+      t.kind,
+      t.duration,
+      t.scheduled_at,
+      t.description,
+      u.id as user_id,
+      u.email
     from talk t
     join user u on u.id=t.author
   `);
-
   return Promise.all(rows.map(async (row: any): Promise<Talk> => {
-    const talkId = row.id as string;
+    const talkId = row.talk_id as number;
     return {
       id: talkId,
-      author: row.u as User,
+      author: {
+        id: row.user_id as number,
+        email: row.email as string
+      },
       title: row.title as string,
       kind: row.kind as Kind,
       duration: row.duration as Duration,
-      scheduled: row.scheduled_at as Date,
+      scheduledAt: row.scheduled_at as Date,
       description: row.description as string,
       likes: await findLikesByTalkId(talkId),
       speakers: await findSpeakersByTalkId(talkId)

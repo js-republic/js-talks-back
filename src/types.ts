@@ -1,5 +1,5 @@
 export interface User {
-    id: string;
+    id: number;
 
     email: string;
 }
@@ -7,10 +7,10 @@ export interface User {
 
 export type Kind = "request" | "proposal";
 
-export type Duration = 30 | 60 | 180;
+export type Duration = "30" | "60" | "180";
 
 export interface Talk {
-    id: string;
+    id?: number;
 
     author: User;
 
@@ -22,7 +22,7 @@ export interface Talk {
 
     kind: Kind;
 
-    scheduled?: Date;
+    scheduledAt?: Date;
 
     likes: User[];
 
