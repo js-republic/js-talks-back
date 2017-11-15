@@ -1,12 +1,3 @@
-import {} from 'jest';
-import * as supertest from "supertest";
-
-const request = supertest("http://localhost:8000");
-
-describe("GET /api", () => {
-  it("should return 200 OK", () => {
-    request
-      .get("/api")
-      .expect(200);
-  });
+test("adds 1 + 2 to equal 3", () => {
+  expect(1 + 2).toBe(3);
 });

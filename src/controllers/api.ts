@@ -1,16 +1,15 @@
 "use strict";
 
 import * as async from "async";
-import * as request from "request";
-import { Response, Request, NextFunction } from "express";
+import { Response, Request, NextFunction, Router } from "express";
 
 /**
  * GET /api
  * List of API examples.
  */
+const router = Router();
 
-export let getApi = (req: Request, res: Response) => {
-	res.render("api/index", {
-		title: "API Examples"
-	});
-};
+router.get("/", (req: Request, res: Response) => {
+  res.json({ name: "JS-Talks API" });
+});
+export default router;
