@@ -8,8 +8,11 @@ export function update(
 ): Promise<number> {
   return new Promise((resolve, reject) => {
     connection.query(sql.query, sql.params, (error, results, fields) => {
-      if (error) reject(error);
-      resolve(results.insertId as number);
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.insertId as number);
+      }
     });
   });
 }
@@ -20,8 +23,11 @@ export function select(
 ): Promise<SelectResult> {
   return new Promise((resolve, reject) => {
     connection.query(sql.query, sql.params, (error, rows, fields) => {
-      if (error) reject(error);
-      resolve({ rows, fields });
+      if (error) {
+        reject(error);
+      } else {
+        resolve({ rows, fields });
+      }
     });
   });
 }

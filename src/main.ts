@@ -1,4 +1,4 @@
-import { insertTalk, findTalks } from "./repository";
+import { addTalk, findTalks } from "./repository";
 import { Talk } from "./types";
 import { initDatabase } from "./database";
 

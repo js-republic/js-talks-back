@@ -1,19 +1,20 @@
 import * as _ from "lodash";
 import { Talk, User, Duration, Kind } from "../types";
 import * as mysql from "mysql";
-import { select, sql, update } from "../database";
+import { select, sql, update, snakeCaseKeys } from "../database";
 
-export async function insertTalk(talk: Talk): Promise<Talk> {
-  const talkToInsert = {
-    description: talk.description,
-    author: talk.author.id,
-    duration: talk.duration,
-    title: talk.title,
-    kind: talk.kind,
-    scheduled_at: talk.scheduledAt,
-  };
-  const id = await update(sql`insert into talk set ${talkToInsert}`);
-  return {...talk, id};
+interface AddTalkParams {
+  description: string;
+  kind: Kind;
+  authorId: number;
+  duration: Duration;
+  title: string;
+  scheduledAt?: Date;
+}
+
+export async function addTalk(addTalkParams: AddTalkParams): Promise<number> {
+  const talkToInsert = snakeCaseKeys(addTalkParams);
+  return await update(sql`insert into talk set ${talkToInsert}`);
 }
 
 export async function findLikesByTalkId(talkId: number): Promise<User[]> {
@@ -45,7 +46,7 @@ export async function findTalks(): Promise<Talk[]> {
       t.duration,
       t.scheduled_at,
       t.description,
-      u.id as user_id,
+      u.id as author_id,
       u.email
     from talk t
     join user u on u.id=t.author
@@ -55,7 +56,7 @@ export async function findTalks(): Promise<Talk[]> {
     return {
       id: talkId,
       author: {
-        id: row.user_id as number,
+        id: row.author_id as number,
         email: row.email as string
       },
       title: row.title as string,

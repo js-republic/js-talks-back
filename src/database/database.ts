@@ -24,14 +24,15 @@ export function initDatabase(
 
 function bindCommands(pool: mysql.IPool): Commands {
   return {
-    select: rawSelect.bind(null, pool),
-    update: rawUpdate.bind(null, pool),
+    select: (sqlQuery) => rawSelect(pool, sqlQuery),
+    update: (sqlQuery) => rawUpdate(pool, sqlQuery),
   };
 }
 
 function checkDbInitilization() {
   if (!commands) {
-    console.warn("Database has not been initialized => Calling initDatabase()...");
+    console.warn(`Database has not been initialized
+    => Calling initDatabase() with default config...`);
     initDatabase();
   }
 }
