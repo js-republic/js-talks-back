@@ -1,9 +1,7 @@
 import * as express from "express";
 import * as compression from "compression";
-import * as session from "express-session";
 import * as bodyParser from "body-parser";
 import * as logger from "morgan";
-import * as errorHandler from "errorhandler";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import apiController from "./controllers/api";
