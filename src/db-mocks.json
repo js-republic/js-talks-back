@@ -1,0 +1,21 @@
+{
+	"talks": [
+		{
+			"id": 1,
+			"author": { "id": 1, "email": "user@mail.com" },
+			"duration": "30",
+			"title": "Talk #1",
+			"description": "Talk #1 description",
+			"kind": "request",
+			"scheduledAt": "2017-11-16T16:15:45.928Z",
+			"likes": [
+				{ "id": 1, "email": "user@mail.com" },
+				{ "id": 2, "email": "user@mail.com" }
+			],
+			"speakers": [
+				{ "id": 1, "email": "user@mail.com" },
+				{ "id": 2, "email": "user@mail.com" }
+			]
+		}
+	]
+}
