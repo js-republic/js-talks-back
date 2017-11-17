@@ -10,10 +10,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
-    "package": "tsc && zip -r artefact dist package.json package-lock.json",
+    "package": "./node_modules/.bin/tsc && zip -r artefact dist package.json package-lock.json",
     "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"tsc -w\" \"npm run serve\"",
     "test": "jest",
-    "test:ci": "jest --forceExit --coverage --coverageDirectory test/coverage",
+    "test:ci": "./node_modules/.bin/jest --forceExit --coverage --coverageDirectory test/coverage",
     "ncu": "ncu",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "debug": "tsc && npm run watch-debug",
