@@ -25,7 +25,7 @@ jobs:
           path: test/unit/coverage
           prefix: tests
       - run: sudo apt-get install python-pip
-      - run: pip install awsebcli --upgrade --user
+      - run: sudo pip install awsebcli --upgrade --user
       - run: |
             if [ "${CIRCLE_BRANCH}" == "master" ];
               then eb deploy;
