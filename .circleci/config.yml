@@ -20,8 +20,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm install
   test-job:
-    requires:
-      - build-job
     working_directory: ~/repo
     docker:
       - image: circleci/node:latest-browsers
@@ -38,8 +36,6 @@ jobs:
     filters:
       branches:
         only: master
-    requires:
-      - build-job
     steps:
       - run: eb deploy
 
@@ -49,4 +45,8 @@ workflows:
     jobs:
       - build-job
       - test-job
+          requires:
+            - build-job
       - deploy-job
+          requires:
+            - test-job
