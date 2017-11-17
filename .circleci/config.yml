@@ -20,13 +20,14 @@ jobs:
           paths:
             - node_modules
           key: node-modules-{{ checksum "package.json" }}
-      - run: npm test
+      - run: npm run test:ci
       - store_artifacts:
-          path: test/unit/coverage
+          path: test/coverage
           prefix: tests
       - run: sudo apt-get install python3.4
       - run: sudo apt-get update && sudo apt-get install -y python-pip libpython-dev python-dev
       - run: pip install awsebcli --upgrade --user
+      - run: git reset HEAD --hard
       - run : npm run package
       - run: |
             if [ "${CIRCLE_BRANCH}" == "master" ];

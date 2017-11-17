@@ -32,6 +32,8 @@ Thumbs.db
 dist/**/*
 *.zip
 
+test/coverage
+
 
 # Elastic Beanstalk Files
 !.elasticbeanstalk/*.cfg.yml
