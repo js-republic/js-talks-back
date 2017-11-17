@@ -1,9 +1,9 @@
-import * as mysql from "mysql";
+import {Pool, Connection} from "mysql";
 import { defaultConfig } from "../config/database";
 import { Commands, SelectResult, SqlQuery } from "./types";
 
 export function update(
-  connection: mysql.IPool | mysql.IConnection,
+  connection: Pool | Connection,
   sql: SqlQuery,
 ): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -18,7 +18,7 @@ export function update(
 }
 
 export function select(
-  connection: mysql.IPool | mysql.IConnection,
+  connection: Pool | Connection,
   sql: SqlQuery
 ): Promise<SelectResult> {
   return new Promise((resolve, reject) => {

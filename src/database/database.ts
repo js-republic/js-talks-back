@@ -1,9 +1,9 @@
-import * as mysql from "mysql";
+import { Pool, ConnectionConfig, createPool } from "mysql";
 import { defaultConfig } from "../config/database";
 import { select as rawSelect, update as rawUpdate } from "./commands";
 import { Commands, SqlQuery } from "./types";
 
-let pool: mysql.IPool;
+let pool: Pool;
 let commands: Commands;
 
 export function select(sql: SqlQuery) {
@@ -15,17 +15,15 @@ export function update(sql: SqlQuery) {
   return commands.update(sql);
 }
 
-export function initDatabase(
-  config: mysql.IConnectionConfig = defaultConfig
-) {
-  pool = mysql.createPool(config);
+export function initDatabase(config: ConnectionConfig = defaultConfig) {
+  pool = createPool(config);
   commands = bindCommands(pool);
 }
 
-function bindCommands(pool: mysql.IPool): Commands {
+function bindCommands(pool: Pool): Commands {
   return {
-    select: (sqlQuery) => rawSelect(pool, sqlQuery),
-    update: (sqlQuery) => rawUpdate(pool, sqlQuery),
+    select: sqlQuery => rawSelect(pool, sqlQuery),
+    update: sqlQuery => rawUpdate(pool, sqlQuery)
   };
 }
 
