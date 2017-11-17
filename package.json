@@ -9,7 +9,8 @@
   "author": "JS-Republicans !",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node dist/server.js",
+    "start": "node dist/server.js",
+    "package": "tsc && zip -r artefact dist package.json package-lock.json",
     "serve": "nodemon dist/server.js",
     "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\" \"npm run watch-ts\" \"npm run serve\"",
     "test": "jest --forceExit",

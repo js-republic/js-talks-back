@@ -1,6 +1,8 @@
 branch-defaults:
   master:
     environment: prod
+  deploy:
+    artifact: artefact.zip
 global:
   application_name: js-talks-back
   branch: null
