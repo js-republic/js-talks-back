@@ -58,6 +58,7 @@
     "@types/supertest": "^2.0.3",
     "concurrently": "^3.5.0",
     "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
     "nodemon": "^1.12.1",
     "npm-check-updates": "^2.13.0",
     "supertest": "^3.0.0",
