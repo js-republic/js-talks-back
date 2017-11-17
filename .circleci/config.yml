@@ -24,7 +24,7 @@ jobs:
       - store_artifacts:
           path: test/unit/coverage
           prefix: tests
-      - run pip install awsebcli --upgrade --user
+      - run: pip install awsebcli --upgrade --user
       - run: |
             if [ "${CIRCLE_BRANCH}" == "master" ];
               then eb deploy;
