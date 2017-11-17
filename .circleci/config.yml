@@ -42,3 +42,11 @@ jobs:
       - build-job
     steps:
       - run: eb deploy
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build-job
+      - test-job
+      - deploy-job
