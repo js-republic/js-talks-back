@@ -13,17 +13,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+          - node-modules-{{ checksum "package.json" }}
+          - node-modules-
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: node-modules-{{ checksum "package.json" }}
       - run: npm install
       - run: npm test
       - store_artifacts:
           path: test/unit/coverage
           prefix: tests
+      - run pip install awsebcli --upgrade --user
       - run: |
             if [ "${CIRCLE_BRANCH}" == "master" ];
               then eb deploy;
