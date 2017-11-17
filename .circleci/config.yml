@@ -4,18 +4,39 @@
 #
 version: 2
   jobs:
-    deploy-job:
+    build-job:
+      working_directory: ~/repo
+      docker:
+        - image: circleci/node:latest-browsers
+        - checkout
+        - restore_cache:
+            keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+        - save_cache:
+            paths:
+              - node_modules
+            key: v1-dependencies-{{ checksum "package.json" }}
+        - run: npm install
+    test-job:
+      requires:
+        - build-job
+      working_directory: ~/repo
       docker:
         - image: circleci/node:latest-browsers
         - image: circleci/mysql:latest
-      working_directory: ~/repository
       steps:
-      checkout
-        - run: npm install
-        # run tests!
         - run: npm test
-        - deploy:
-            command: |
-              if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                eb deploy
-              fi
+        - store_artifacts:
+            path: test/unit/coverage
+            prefix: tests
+    deploy-job:
+      working_directory: ~/repo
+      docker:
+        - image: circleci/node:latest-browsers
+      filters:
+        branches:
+          only: master
+      requires:
+        - build-job
+      command: "eb deploy"
