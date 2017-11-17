@@ -26,8 +26,8 @@ jobs:
           prefix: tests
       - run: sudo apt-get install python3.4
       - run: sudo apt-get update && sudo apt-get install -y python-pip libpython-dev python-dev
-      - run: sudo pip install awsebcli --upgrade --user
+      - run: pip install awsebcli --upgrade --user
       - run: |
             if [ "${CIRCLE_BRANCH}" == "master" ];
-              then eb deploy;
+              then ~/.local/bin/eb deploy;
             fi
