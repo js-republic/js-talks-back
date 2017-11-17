@@ -25,6 +25,6 @@ jobs:
           path: test/unit/coverage
           prefix: tests
       - run: |
-            if [ "${CIRCLE_BRANCH}" == "staging" ];
+            if [ "${CIRCLE_BRANCH}" == "master" ];
               then eb deploy;
             fi
