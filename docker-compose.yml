@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+
+  app:
+    build:
+      context: .
+    links:
+      - db
+    ports:
+      - "8080:8080"
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: "root"
+      MYSQL_DATABASE: "mydb"
+    volumes:
+      - ./src/sql:/docker-entrypoint-initdb.d
+
