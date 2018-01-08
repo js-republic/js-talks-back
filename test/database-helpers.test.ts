@@ -1,4 +1,4 @@
-import { sql } from "../src/database/helpers";
+import { sql, snakeCaseKeys } from "../src/database/helpers";
 
 describe("database helpers", () => {
   it("should return an SqlQuery", () => {
@@ -13,5 +13,19 @@ describe("database helpers", () => {
       query: "select * from table where id=?",
       params: [5],
     });
+  });
+
+  it("should transform object keys in snake case", () => {
+    // given
+    const data = {
+      "data-test": 0,
+      "stringItemTest": "ok"
+    };
+
+    // when
+    const dataSnakeCaseKeys = snakeCaseKeys(data);
+
+    // then
+    expect(Object.keys(dataSnakeCaseKeys)).toEqual(["data_test", "string_item_test"]);
   });
 });

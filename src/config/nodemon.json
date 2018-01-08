@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "watch": ["src"],
+  "env": {
+    "HOSTNAME": "localhost",
+    "PORT": 8080
+  },
+  "exec": "ts-node ./src/server.ts"
+}

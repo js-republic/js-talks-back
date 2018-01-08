@@ -1,4 +1,4 @@
-import {Pool, Connection} from "mysql";
+import { Pool, Connection } from "mysql";
 import { defaultConfig } from "../config/database";
 import { Commands, SelectResult, SqlQuery } from "./types";
 
