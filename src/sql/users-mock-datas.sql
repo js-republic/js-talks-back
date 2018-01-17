@@ -1,0 +1,21 @@
+-- Users
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (1, 'tsugg0@eepurl.com', '7:02 AM', '12:40 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (2, 'fbeavan1@rakuten.co.jp', '11:52 PM', '2:41 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (3, 'kmeiklam2@i2i.jp', '8:31 AM', '6:39 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (4, 'zandrzejczak3@google.com.au', '1:43 PM', '12:49 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (5, 'cbrisley4@china.com.cn', '6:03 AM', '1:22 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (6, 'rmoubray5@edublogs.org', '4:26 AM', '12:10 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (7, 'ptooker6@nbcnews.com', '7:28 PM', '6:38 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (8, 'mboot7@studiopress.com', '4:13 AM', '3:45 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (9, 'sdrewclifton8@github.io', '10:22 PM', '1:10 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (10, 'gwivell9@cnbc.com', '2:38 PM', '5:04 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (11, 'mmccallistera@yahoo.co.jp', '5:54 PM', '6:13 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (12, 'mdowbigginb@cdc.gov', '10:52 AM', '1:53 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (13, 'dbellissc@thetimes.co.uk', '4:32 AM', '2:57 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (14, 'vwoliterd@goo.ne.jp', '9:35 PM', '3:38 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (15, 'cbowyere@mozilla.com', '9:05 PM', '6:54 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (16, 'carneckef@ezinearticles.com', '4:02 AM', '12:05 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (17, 'ccountg@whitehouse.gov', '11:37 AM', '10:22 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (18, 'mcolisbeh@nytimes.com', '12:47 PM', '3:53 PM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (19, 'sbergi@last.fm', '11:19 PM', '8:21 AM');
+insert into `js_talks_db`.`users` (user_id, email, created_at, updated_at) values (20, 'dkytej@domainmarket.com', '10:30 PM', '7:40 AM');
