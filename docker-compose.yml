@@ -16,7 +16,8 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_USER: "root"
-      MYSQL_DATABASE: "mydb"
+      MYSQL_DATABASE: "js_talks_db"
+    ports:
+      - "3306:3306"
     volumes:
       - ./src/sql:/docker-entrypoint-initdb.d
-
