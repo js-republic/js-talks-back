@@ -1,7 +1,7 @@
 export const defaultConfig = {
-  host: "127.0.0.1",
+  host: "localhost",
   connectionLimit : 10,
   user: "root",
   password: "",
-  database: "mydb",
+  database: "js_talks_db",
 };

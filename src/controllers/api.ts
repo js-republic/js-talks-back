@@ -3,17 +3,17 @@
 import * as async from "async";
 import { Response, Request, NextFunction, Router } from "express";
 
-import Sequelize from "sequelize"
+import Sequelize from "sequelize";
 
-const sequelize = new Sequelize('js_talks_db', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
+const sequelize = new Sequelize("js_talks_db", "root", "", {
+    host: "localhost",
+    dialect: "mysql",
     operatorsAliases: false
-})
+});
 
 sequelize.query("SELECT * FROM users").then(datas => {
-    console.log('Query result', datas)
-})
+    console.log("Query result", datas);
+});
 
 // const mysql = require('mysql');
 

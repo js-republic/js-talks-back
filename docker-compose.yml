@@ -6,16 +6,15 @@ services:
     build:
       context: .
     links:
-      - db
+      - mysql
     ports:
-      - "8080:8080"
+      - "8888:8080"
 
-  db:
+  mysql:
     image: mysql
     restart: always
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_USER: "root"
       MYSQL_DATABASE: "js_talks_db"
     ports:
       - "3306:3306"

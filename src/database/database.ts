@@ -16,6 +16,7 @@ export function update(sql: SqlQuery) {
 }
 
 export function initDatabase(config: ConnectionConfig = defaultConfig) {
+  console.log("connexion", config);
   pool = createPool(config);
   commands = bindCommands(pool);
 }
