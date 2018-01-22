@@ -39,4 +39,4 @@ test/coverage
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-src/sql/js_talks_db.mwb.bak
+resources/js_talks_db.mwb.bak
