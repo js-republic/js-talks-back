@@ -52,15 +52,15 @@ router.post("/talks", (req: Request, res: Response) => {
 });
 
 // Update talk
-router.put("/talks/:talk_id", (req: Request, res: Repsonse) => {
-    const talk_id = req.param('talk_id')
+router.put("/talks/:talk_id", (req: Request, res: Response) => {
+    const talk_id = parseInt(req.param('talk_id'))
     const talk = req.body
     updateTalk(talk_id, talk).then(datas => res.status(200).json(datas))
 });
 
 // Delete talk
 router.delete("/talks/:talk_id", (req: Request, res: Response) => {
-    const talk_id = req.param('talk_id')
+    const talk_id = parseInt(req.param('talk_id'))
     removeTalks(talk_id).then(result => res.status(200))
 });
 
