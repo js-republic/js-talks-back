@@ -10,27 +10,28 @@ export async function addTalk(addTalkParams: AddTalkParams): Promise<number> {
   delete addTalkParams.speakers
 
   const talkToInsert = snakeCaseKeys(addTalkParams);
-  const talkId = parseInt(await update(sql`INSERT INTO talks SET ${talkToInsert}`));
+  let talkId = await update(sql`INSERT INTO talks SET ${talkToInsert}`);
+      talkId = talkId as number
 
   let speakersIds = [] as Array<any>
   speakersIdsList.map((userId: number) => speakersIds.push([userId, talkId]))
 
   addSpeakers(speakersIds);
 
-  return findLikesByTalkId(talkId)
+  return talkId
 }
 
 export async function addSpeakers(speakersId: Array<number>): Promise<number> {
   return await update(sql`INSERT INTO speakers (user_id, talk_id) VALUES ${speakersId}`);
 }
 
-export async function updateTalk(talkId: number, talk: Talk): Promise<Talk[]> {
+export async function updateTalk(talkId: number, talk: Talk): Promise<number> {
   return await update(sql`
     UPDATE talks SET ${talk} WHERE talk_id = ${talkId}
   `)
 }
 
-export async function removeTalks(talkId: number): Promise<Talk> {
+export async function removeTalks(talkId: number): Promise<number> {
   return await update(sql`
     UPDATE talks SET is_active = 0 WHERE talk_id = ${talkId}
   `)
