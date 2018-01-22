@@ -31,17 +31,17 @@ router.get("/talks", (req: Request, res: Response) => {
 });
 
 router.get("/talks/:talk_id", (req: Request, res: Response) => {
-    const talk_id = req.param('talk_id')
+    const talk_id = parseInt(req.param('talk_id'))
     findTalksById(talk_id).then(datas => res.status(200).json(datas))
 });
 
 router.get("/talks/:talk_id/likes", (req: Request, res: Response) => {
-    const talk_id = req.param('talk_id')
+    const talk_id = parseInt(req.param('talk_id'))
     findLikesByTalkId(talk_id).then(datas => res.status(200).json(datas))
 });
 
 router.get('/talks/:talk_id/speakers', (req: Request, res: Response) => {
-    const talk_id = req.param('talk_id')
+    const talk_id = parseInt(req.param('talk_id'))
     findSpeakersByTalkId(talk_id).then(datas => res.status(200).json(datas))
 });
 

@@ -12,8 +12,8 @@ export async function addTalk(addTalkParams: AddTalkParams): Promise<number> {
   const talkToInsert = snakeCaseKeys(addTalkParams);
   const talkId = await update(sql`INSERT INTO talks SET ${talkToInsert}`);
 
-  let speakersIds = []
-  speakersIdsList.map(userId => speakersIds.push([userId, talkId]))
+  let speakersIds = [] as Array<any>
+  speakersIdsList.map((userId: number) => speakersIds.push([userId, talkId]))
 
   addSpeakers(speakersIds);
 
