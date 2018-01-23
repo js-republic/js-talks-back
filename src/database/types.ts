@@ -11,4 +11,5 @@ export interface SelectResult {
 export interface Commands {
   select: (sql: SqlQuery) => Promise<SelectResult>;
   update: (sql: SqlQuery) => Promise<number>;
+  remove: (sql: SqlQuery) => Promise<any>;
 }

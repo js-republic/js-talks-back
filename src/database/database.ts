@@ -1,6 +1,10 @@
 import { Pool, ConnectionConfig, createPool } from "mysql";
 import { defaultConfig } from "../config/database";
-import { select as rawSelect, update as rawUpdate } from "./commands";
+import {
+  select as rawSelect,
+  update as rawUpdate,
+  remove as rowDelete
+} from "./commands";
 import { Commands, SqlQuery } from "./types";
 
 let pool: Pool;
@@ -15,6 +19,11 @@ export function update(sql: SqlQuery) {
   return commands.update(sql);
 }
 
+export function remove(sql: SqlQuery) {
+  checkDbInitilization();
+  return commands.remove(sql);
+}
+
 export function initDatabase(config: ConnectionConfig = defaultConfig) {
   console.log("connexion", config);
   pool = createPool(config);
@@ -24,7 +33,8 @@ export function initDatabase(config: ConnectionConfig = defaultConfig) {
 function bindCommands(pool: Pool): Commands {
   return {
     select: sqlQuery => rawSelect(pool, sqlQuery),
-    update: sqlQuery => rawUpdate(pool, sqlQuery)
+    update: sqlQuery => rawUpdate(pool, sqlQuery),
+    remove: sqlQuery => rowDelete(pool, sqlQuery)
   };
 }
 
