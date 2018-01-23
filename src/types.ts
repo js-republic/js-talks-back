@@ -14,6 +14,7 @@ export interface Talk {
     title: string;
     description: string;
     kind: Kind;
+    is_active?: number;
     scheduledAt?: Date;
     likes: User[];
     speakers: User[];
