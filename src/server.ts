@@ -4,10 +4,13 @@ import * as bodyParser from "body-parser";
 import * as logger from "morgan";
 import * as dotenv from "dotenv";
 import * as path from "path";
-import apiController from "./controllers/api";
+
+import routes from "./routes";
 
 dotenv.config({ path: ".env" });
+
 const app = express();
+
 app.set("port", process.env.PORT);
 app.use(compression());
 app.use(logger("dev"));
@@ -17,7 +20,8 @@ app.use(
     express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
 );
 
-app.use("/api", apiController);
+app.use("/api", routes);
+
 app.get("/", (req, res) => {
     res.json({
         name: "JS-Talks Back-End",
@@ -30,9 +34,6 @@ app.get("/", (req, res) => {
     });
 });
 
-/**
- * Start Express server.
- */
 app.listen(app.get("port"), () => {
     console.log(
         `\tApp is running at http://${process.env.HOSTNAME}:${app.get(
@@ -42,4 +43,4 @@ app.listen(app.get("port"), () => {
     console.log("\tPress CTRL-C to stop\n");
 });
 
-module.exports = app;
+export default app;
