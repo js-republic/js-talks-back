@@ -5,12 +5,11 @@ import { Commands, SelectResult, SqlQuery } from "./../types";
 export function update(connection: Pool | Connection, sql: SqlQuery): Promise<number> {
   return new Promise((resolve, reject) => {
     connection.query(sql.query, sql.params, (error, results, fields) => {
-      // if (error) {
-        console.log('UPDATE REJECT', error)
+      if (error) {
         reject(error);
-      // } else {
-      //   resolve(results.insertId as number);
-      // }
+      } else {
+        resolve(results.insertId as number);
+      }
     });
   });
 }
@@ -19,7 +18,6 @@ export function select(connection: Pool | Connection, sql: SqlQuery): Promise<Se
   return new Promise((resolve, reject) => {
     connection.query(sql.query, sql.params, (error, rows, fields) => {
       if (error) {
-        console.log('SELECT REJECT', error)
         reject(error);
       } else {
         resolve({ rows, fields });
@@ -31,12 +29,11 @@ export function select(connection: Pool | Connection, sql: SqlQuery): Promise<Se
     export function remove(connection: Pool | Connection, sql: SqlQuery): Promise<number> {
       return new Promise((resolve, reject) => {
         connection.query(sql.query, sql.params, (error, results, fields) => {
-        // if (error) {
-          console.log('REMOVE REJECT', error)
+        if (error) {
           reject(error);
-        // } else {
-        //   resolve(results as any);
-        // }
+        } else {
+          resolve(results as any);
+        }
     });
   });
 }
