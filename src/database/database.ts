@@ -5,7 +5,7 @@ import {
   update as rawUpdate,
   remove as rowDelete
 } from "./commands";
-import { Commands, SqlQuery } from "./types";
+import { Commands, SqlQuery } from "./../types";
 
 let pool: Pool;
 let commands: Commands;
