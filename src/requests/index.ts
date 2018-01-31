@@ -1,5 +1,5 @@
-import { Talk, User, Duration, Kind, AddTalkParams } from "../types";
-import { select, sql, update, remove, snakeCaseKeys } from "../database";
+import { Talk, User, Duration, Kind, AddTalkParams } from "./../types";
+import { select, sql, update, remove, snakeCaseKeys } from "./../database";
 import { transformToIntArray } from './../database/helpers'
 
 export async function addTalk(addTalkParams: AddTalkParams): Promise<number> {
