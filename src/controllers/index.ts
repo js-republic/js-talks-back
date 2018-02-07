@@ -10,10 +10,9 @@ import {
     addSpeakers,
     updateTalk,
     removeTalks,
-    removeLike
+    removeLike,
+    hasAlreadyLiked
 } from "./../requests"
-
-const router = Router()
 
 export const home = (req: Request, res: Response) => {
     res.json('/')
@@ -109,5 +108,3 @@ export const getUsers = (req: Request, res: Response) => {
     .then(datas => res.status(200).json(datas))
     .catch(error => res.status(400).json({ error }))
 }
-
-export default router;

@@ -128,13 +128,13 @@ export async function addLike(talkId: number, userId: number): Promise<number> {
 export async function findLikesByTalkId(talkId: number): Promise<User[]> {
   try  {
     const { rows } = await select(sql`
-    SELECT
-    users.user_id,
-    users.email
-    FROM likes l
-    JOIN users ON l.user_id = users.user_id
-    JOIN talks t ON t.talk_id = l.talk_id
-    WHERE l.talk_id = ${talkId} AND t.is_active = 1
+      SELECT
+        users.user_id,
+        users.email
+      FROM likes l
+      JOIN users ON l.user_id = users.user_id
+      JOIN talks t ON t.talk_id = l.talk_id
+      WHERE l.talk_id = ${talkId} AND t.is_active = 1
     `);
     return rows.map((row: any): User => row as User);
   } catch (error) {
