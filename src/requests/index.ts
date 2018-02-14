@@ -71,7 +71,6 @@ export async function findTalksById(talkId: number): Promise<Talk[]> {
       JOIN users u ON t.author_id = u.user_id
       WHERE t.talk_id = ${talkId} AND t.is_active = 1
     `);
-
     return Promise.all(rows.map(async (row: any): Promise<Talk> => {
       return {
         talk_id: talkId,
@@ -129,7 +128,7 @@ export async function findLikesByTalkId(talkId: number): Promise<User[]> {
   try  {
     const { rows } = await select(sql`
       SELECT
-        users.user_id,
+        DISTINCT(users.user_id),
         users.email
       FROM likes l
       JOIN users ON l.user_id = users.user_id
@@ -152,9 +151,8 @@ export async function removeLike(talkId: number, userId: number): Promise<number
 
 export async function addSpeakers(talkId: number, speakersIdsList: Array<number>): Promise<number> {
   try {
-    let speakersIds = [] as Array<any>
-    speakersIdsList.map((userId: number) => speakersIds.push([userId, talkId]))
-    return await update(sql`INSERT INTO speakers (user_id, talk_id) VALUES ${speakersIds}`);
+    // TODO le reste de la requete devra ressembler à  " ..... VALUES (${userId},${talkId}), (${userId},${talkId})"
+    return await update(sql`INSERT INTO speakers (user_id, talk_id) VALUES `);
   } catch (error) {
     throw error;
   }
