@@ -19,7 +19,7 @@ export async function findTalks(): Promise<Talk[]> {
     const { rows } = await select(sql`
       SELECT
         t.talk_id,
-        t.titles,
+        t.title,
         t.kind,
         t.duration,
         t.scheduled_at,
