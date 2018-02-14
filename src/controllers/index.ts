@@ -18,93 +18,126 @@ export const home = (req: Request, res: Response) => {
     res.json('/')
 }
 
-export const postTalk = (req: Request, res: Response) => {
+export const postTalk_ = (req: Request, res: Response) => {
     const talk = req.body
-    const speakers = req.body.speakers
+    const hasSpeakers = talk.speakers && talk.speakers.length > 1
     addTalk(talk)
-    .then(talkId => {
-        if (speakers && speakers.length > 1) {
-            addSpeakers(talkId, speakers)
-            .then(datas => {
-                findTalksById(talkId)
-                .then(datas => res.status(200).json(datas))
-                .catch(error => res.status(400).json({ error }))
-            })
-            .catch(error => res.status(400).json({ error }))
-        } else {
-            findTalksById(talkId)
-            .then(datas => res.status(200).json(datas))
-            .catch(error => res.status(400).json({ error }))
-        }
-    })
-    .catch(error => res.status(400).json({ error }))
-}
-
-export const getTalks = (req: Request, res: Response) => {
-    findTalks()
-    .then(datas => res.status(200).json(datas))
-    .catch(error => res.status(400).json({ error }))
-}
-
-export const getTalkById = (req: Request, res: Response) => {
-    const talk_id = req.params.talk_id
-    findTalksById(talk_id)
-    .then(datas => res.status(200).json(datas))
-    .catch(error => res.status(400).json({ error }))
-}
-
-export const editTalkById = (req: Request, res: Response) => {
-    const talk_id = req.params.talk_id as number
-    const talk = req.body
-    updateTalk(talk_id, talk)
-    .then(datas => {
-        findTalksById(talk_id)
+        .then<any[]>(talkId => {
+            if (hasSpeakers) {
+                return Promise.all([talkId, addSpeakers(talkId, talk.speakers)])
+            } else {
+                return [talkId]
+            }
+        })
+        .then(([talkId]) => findTalksById(talkId))
         .then(datas => res.status(200).json(datas))
         .catch(error => res.status(400).json({ error }))
-    })
-    .catch(error => res.status(400).json({ error }))
 }
 
-export const deleteTalk = (req: Request, res: Response) => {
+export const postTalk = async (req: Request, res: Response) => {
+    const talk = req.body
+    const hasSpeakers = talk.speakers && talk.speakers.length > 1
+    try {
+        const talkId = await addTalk(talk)
+        if (hasSpeakers) {
+            await addSpeakers(talkId, talk.speakers)
+        }
+        const datas = await findTalksById(talkId)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+}
+
+export const getTalks = async (req: Request, res: Response) => {
+    try {
+        const datas = await findTalks()
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+}
+
+export const getTalkById = async (req: Request, res: Response) => {
+    const talkId = req.params.talk_id
+    try {
+        const datas = await findTalksById(talkId)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+}
+
+export const editTalkById = async (req: Request, res: Response) => {
+    const talk_id = req.params.talk_id as number
+    const talk = req.body
+    try {
+        await updateTalk(talk_id, talk)
+        const datas = await findLikesByTalkId(talk_id)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+}
+
+export const deleteTalk = async (req: Request, res: Response) => {
     const talk_id = req.params.talk_id
-    removeTalks(talk_id)
-    .then(result => res.status(200))
-    .catch(error => res.status(400).json({ error }))
+    try {
+        await removeTalks(talk_id)
+        res.status(200)
+    } catch (error) {
+        res.status(400).json({error})
+    }
 }
 
-export const postLike = (req: Request, res: Response) => {
+export const postLike = async (req: Request, res: Response) => {
     const talk_id = req.params.talk_id
     const user_id = req.body.user_id
-    addLike(talk_id, user_id)
-    .then(datas => res.status(200).json(datas))
-    .catch(error => res.status(400).json({ error }))
+    try {
+        const datas = await addLike(talk_id, user_id)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
 }
 
-export const getLike = (req: Request, res: Response) => {
+export const getLike = async (req: Request, res: Response) => {
     const talk_id = req.params.talk_id
-    findLikesByTalkId(talk_id)
-    .then(datas => res.status(200).json(datas))
-    .catch(error => res.status(400).json({ error }))
+    try {
+        const datas = await findLikesByTalkId(talk_id)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
 }
 
-export const deleteLike = (req: Request, res: Response) => {
+export const deleteLike = async (req: Request, res: Response) => {
     const talk_id = req.params.talk_id
     const user_id = req.body.user_id
-    removeLike(talk_id, user_id)
-    .then(datas => res.status(200))
-    .catch(error => res.status(400).json({ error }))
+    try {
+        await removeLike(talk_id, user_id)
+        res.status(200)
+    } catch (error) {
+        res.status(400).json({error})
+    }
 }
 
-export const getSpeakers = (req: Request, res: Response) => {
+export const getSpeakers = async (req: Request, res: Response) => {
     const talk_id = req.params.talk_id
-    findSpeakersByTalkId(talk_id)
-    .then(datas => res.status(200).json(datas))
-    .catch(error => res.status(400).json({ error }))
+    try {
+        const datas = await findSpeakersByTalkId(talk_id)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
 }
 
-export const getUsers = (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response) => {
     const email = req.headers.email as string
-    findUserByMail(email)
-    .then(datas => res.status(200).json(datas))
-    .catch(error => res.status(400).json({ error }))
+    try {
+        const datas = await findUserByMail(email)
+        res.status(200).json(datas)
+    } catch (error) {
+        res.status(400).json({error})
+    }
 }
