@@ -10,8 +10,7 @@ import {
     addSpeakers,
     updateTalk,
     removeTalks,
-    removeLike,
-    hasAlreadyLiked
+    removeLike
 } from "./../requests"
 
 export const home = (req: Request, res: Response) => {
